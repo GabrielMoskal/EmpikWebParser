@@ -2,7 +2,7 @@ package parser;
 
 import org.junit.Test;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,5 +54,11 @@ public class EmpikEbookParserTest {
             e.printStackTrace();
         }
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void parseLinksToConcreteBookUrls() throws IOException {
+
+
     }
 }

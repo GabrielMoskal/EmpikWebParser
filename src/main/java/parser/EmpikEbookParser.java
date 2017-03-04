@@ -14,9 +14,17 @@ import java.util.List;
 public class EmpikEbookParser {
     Document document;
 
+    public EmpikEbookParser() {
+        this.document = null;
+    }
+
     public EmpikEbookParser(String url) throws IOException {
         setDocumentFromUrl(url);
         preserveLineBreaks();
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
     }
 
     public void setDocumentFromUrl(String url) throws IOException {
@@ -77,5 +85,19 @@ public class EmpikEbookParser {
         String result = description.text().replaceAll("\\\\n", "\n");
         Jsoup.clean(result, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
         return result;
+    }
+
+    public List<String> parseLinksToConcreteBookUrls() {
+        String rootUrl = "http://www.empik.com";
+        Elements labels = document.getElementsByClass("productBox-450Title");
+        List<String> concreteUrls = new ArrayList<String>();
+        for (Element element : labels) {
+            Elements links = element.select("a[href]");
+            for (Element link : links) {
+                String child = rootUrl + link.attr("href");
+                concreteUrls.add(child);
+            }
+        }
+        return concreteUrls;
     }
 }
