@@ -1,5 +1,7 @@
 package parser;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Test;
 
 import java.io.*;
@@ -58,7 +60,19 @@ public class EmpikEbookParserTest {
 
     @Test
     public void parseLinksToConcreteBookUrls() throws IOException {
+        List<String> expectedResult = new ArrayList<String>();
+        expectedResult.add("http://www.empik.com/portret-modej-wenecjanki-pilch-jerzy,p1136197781,ebooki-i-mp3-p");
+        expectedResult.add("http://www.empik.com/wielkie-klamstewka-moriarty-liane,p1137958541,ebooki-i-mp3-p");
 
+        String filePath = new File("").getAbsolutePath();
+        filePath = filePath + "\\src\\test\\java\\parser\\PageWithLinksToConcreteEbooks.html";// "\\PageWithLinksToConcreteEbooks.html";
+        File input = new File(filePath);
 
+        EmpikEbookParser parser = new EmpikEbookParser();
+        Document doc = Jsoup.parse(input, "UTF-8", "");
+        parser.setDocument(doc);
+        List<String> result = parser.parseLinksToConcreteBookUrls();
+
+        assertEquals(expectedResult, result);
     }
 }

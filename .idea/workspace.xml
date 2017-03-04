@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f89f37e-4529-4d6f-880a-8bd15fd418a1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/parser/PageWithLinksToConcreteEbooks.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/parser/PageWithLinksToConcreteEbooks.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/parser/EmpikEbookParser.java" afterPath="$PROJECT_DIR$/src/main/java/parser/EmpikEbookParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/parser/TestDrive.java" afterPath="$PROJECT_DIR$/src/main/java/parser/TestDrive.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/parser/EmpikEbookParserTest.java" afterPath="$PROJECT_DIR$/src/test/java/parser/EmpikEbookParserTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -47,8 +42,8 @@
       <file leaf-file-name="TestDrive.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/parser/TestDrive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="41" column="66" lean-forward="true" selection-start-line="41" selection-start-column="66" selection-end-line="41" selection-end-column="66" />
+            <state relative-caret-position="808">
+              <caret line="58" column="22" lean-forward="true" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,7 +64,7 @@
       <file leaf-file-name="EmpikEbookParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/parser/EmpikEbookParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="582">
+            <state relative-caret-position="1770">
               <caret line="95" column="40" lean-forward="true" selection-start-line="95" selection-start-column="40" selection-end-line="95" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -84,10 +79,11 @@
       <file leaf-file-name="EmpikEbookParserTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/parser/EmpikEbookParserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="370">
+              <caret line="75" column="45" lean-forward="true" selection-start-line="75" selection-start-column="45" selection-end-line="75" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3311#3319#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -735,7 +731,7 @@
       <workItem from="1488356913461" duration="5046000" />
       <workItem from="1488396361716" duration="121000" />
       <workItem from="1488401691793" duration="3933000" />
-      <workItem from="1488645144957" duration="1625000" />
+      <workItem from="1488645144957" duration="2708000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;added concrete ebook parser&quot;">
       <created>1488362544083</created>
@@ -748,7 +744,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36930000" />
+    <option name="totallyTimeSpent" value="38013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -862,6 +858,7 @@
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3311#3319#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -914,6 +911,7 @@
           <caret line="42" column="45" lean-forward="true" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3311#3319#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -963,6 +961,7 @@
           <caret line="30" column="86" lean-forward="true" selection-start-line="30" selection-start-column="86" selection-end-line="30" selection-end-column="86" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3311#3319#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1028,6 +1027,7 @@
           <caret line="34" column="23" lean-forward="false" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3311#3319#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1213,25 +1213,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/parser/TestDrive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="808">
+          <caret line="58" column="22" lean-forward="true" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/parser/EmpikEbookParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="582">
+        <state relative-caret-position="1770">
           <caret line="95" column="40" lean-forward="true" selection-start-line="95" selection-start-column="40" selection-end-line="95" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#371#372#0" expanded="true" />
             <element signature="e#407#408#0" expanded="true" />
             <element signature="e#3812#3820#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/parser/TestDrive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="41" column="66" lean-forward="true" selection-start-line="41" selection-start-column="66" selection-end-line="41" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1246,10 +1246,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/parser/EmpikEbookParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="370">
+          <caret line="75" column="45" lean-forward="true" selection-start-line="75" selection-start-column="45" selection-end-line="75" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3311#3319#0" expanded="true" />
           </folding>
         </state>
       </provider>
