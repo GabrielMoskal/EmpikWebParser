@@ -1,54 +1,32 @@
 package parser;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.helper.Validate;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-
-import parser.Pair;
 
 public class TestDrive {
     public static void main(String[] args) throws IOException {
+        EmpikEbookParser parser = new EmpikEbookParser("http://www.empik.com/ebooki");
+        List<String> links = parser.parseLinksToConcreteCategories();
+        int count = 0;
+        for (String link : links) {
+            parser.setDocumentFromUrl(link);
+            List<String> concreteBookUrls = parser.parseLinksToConcreteBookUrls();
+            for (String concreteBookUrl : concreteBookUrls) {
+                parser.setDocumentFromUrl(concreteBookUrl);
+                List<Pair<String, String>> booksInfo = parser.parseBookInfo();
+                if (booksInfo == null) {
+                    continue;
+                }
+                count++;
+                System.out.println(count);
+                //for (Pair<String, String> bookInfo : booksInfo) {
+                    //System.out.println(bookInfo);
+                //}
+            }
+            //String desc = parser.parseBookDescription();
 
-        String filePath = new File("").getAbsolutePath();
-        //System.out.println(filePath);
 
-
-        /*
-        FileReader fReader = new FileReader(filePath);
-        BufferedReader reader = new BufferedReader(fReader);
-        String text = reader.readLine();
-        while (text != null) {
-            text = text + reader.readLine();
-        }
-            */
-
-        //filePath = filePath + "\\src\\main\\java\\parser\\PageWithLinksToConcreteEbooks.html";// "\\PageWithLinksToConcreteEbooks.html";
-        EmpikEbookParser parser = new EmpikEbookParser("http://www.empik.com/ebooki-i-mp3,350102,s?c=ebooki-i-mp3-ebooki-biografie-i-dokument");
-        //File input = new File(filePath);
-        //Document doc = Jsoup.parse(input, "UTF-8", "");
-        //parser.setDocument(doc);
-
-        List<String> urls = parser.parseLinksToConcreteBookUrls();
-
-        for (String url : urls) {
-            System.out.println(url);
-            //parser.setDocumentFromUrl(url);
-            /*
-            String description = parser.parseBookDescription();
-            System.out.println(description);
-            count++;
-            */
+            //System.out.println(link);
         }
 
         /*
@@ -104,7 +82,7 @@ public class TestDrive {
         */
     }
     public static void parseConcreteEbook(String url) throws IOException {
-        String tempUrl = new String("http://www.empik.com/angielski-dla-uczniow-szkol-podstawowych-boguslawska-joanna,p1136241152,ebooki-i-mp3-p");
+        String tempUrl = "http://www.empik.com/angielski-dla-uczniow-szkol-podstawowych-boguslawska-joanna,p1136241152,ebooki-i-mp3-p";
         EmpikEbookParser empikEbookParser = new EmpikEbookParser(url);
         String description = empikEbookParser.parseBookDescription();
         List<Pair<String, String>> bookInfo = empikEbookParser.parseBookInfo();

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmpikEbookParser {
-    Document document;
+    private Document document;
 
     public EmpikEbookParser() {
         this.document = null;
@@ -43,11 +43,17 @@ public class EmpikEbookParser {
     public List<Pair<String, String>> parseBookInfo() throws IOException {
         Element productMainInfo = document.getElementById("tabs");
         Pair<Elements, Elements> pairOfLabelsAndDetails = makePairOfLabelsAndDetails(productMainInfo);
+        if (pairOfLabelsAndDetails == null) {
+            return null;
+        }
         List<Pair<String, String>> bookInfo = makeBookInfo(pairOfLabelsAndDetails);
         return bookInfo;
     }
 
     private Pair<Elements, Elements> makePairOfLabelsAndDetails(Element productMainInfo) {
+        if (productMainInfo == null) {
+            return null;
+        }
         Elements labels = productMainInfo.getElementsByClass("productDetailsLabel");
         Elements details = productMainInfo.getElementsByClass("productDetailsValue");
         Pair<Elements, Elements> pairOfLabelsAndDetails = new Pair<Elements, Elements>();
@@ -90,6 +96,20 @@ public class EmpikEbookParser {
     public List<String> parseLinksToConcreteBookUrls() {
         String rootUrl = "http://www.empik.com";
         Elements labels = document.getElementsByClass("productBox-450Title");
+        List<String> concreteUrls = new ArrayList<String>();
+        for (Element element : labels) {
+            Elements links = element.select("a[href]");
+            for (Element link : links) {
+                String child = rootUrl + link.attr("href");
+                concreteUrls.add(child);
+            }
+        }
+        return concreteUrls;
+    }
+
+    public List<String> parseLinksToConcreteCategories() {
+        String rootUrl = "http://www.empik.com";
+        Elements labels = document.getElementsByClass("menuCategories");
         List<String> concreteUrls = new ArrayList<String>();
         for (Element element : labels) {
             Elements links = element.select("a[href]");

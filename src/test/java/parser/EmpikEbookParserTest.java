@@ -65,7 +65,7 @@ public class EmpikEbookParserTest {
         expectedResult.add("http://www.empik.com/wielkie-klamstewka-moriarty-liane,p1137958541,ebooki-i-mp3-p");
 
         String filePath = new File("").getAbsolutePath();
-        filePath = filePath + "\\src\\test\\java\\parser\\PageWithLinksToConcreteEbooks.html";// "\\PageWithLinksToConcreteEbooks.html";
+        filePath = filePath + "\\src\\test\\java\\parser\\PageWithLinksToConcreteEbooks.html";
         File input = new File(filePath);
 
         EmpikEbookParser parser = new EmpikEbookParser();
