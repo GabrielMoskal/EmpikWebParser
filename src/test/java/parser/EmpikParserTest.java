@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class EmpikEbookParserTest {
+public class EmpikParserTest {
 
     @Test
     public void parseBookInfoTest() {
@@ -33,8 +33,8 @@ public class EmpikEbookParserTest {
         String url = "http://www.empik.com/w-kregach-wladzy-tom-1-wotum-nieufnosci-mroz-remigiusz,p1135880608,ebooki-i-mp3-p";
         List<Pair<String, String>> result = null;
         try {
-            EmpikEbookParser parser = new EmpikEbookParser(url);
-            result = parser.parseBookInfo();
+            EmpikParser parser = new EmpikParser(url);
+            result = parser.parseConcreteItemInformation();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,7 +50,8 @@ public class EmpikEbookParserTest {
         String url = "http://www.empik.com/w-kregach-wladzy-tom-1-wotum-nieufnosci-mroz-remigiusz,p1135880608,ebooki-i-mp3-p";
         String result = null;
         try {
-            EmpikEbookParser parser = new EmpikEbookParser(url);
+            EmpikParser parser = new EmpikParser(url);
+            parser.preserveLineBreaks();
             result = parser.parseBookDescription();
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,10 +69,10 @@ public class EmpikEbookParserTest {
         filePath = filePath + "\\src\\test\\java\\parser\\PageWithLinksToConcreteEbooks.html";
         File input = new File(filePath);
 
-        EmpikEbookParser parser = new EmpikEbookParser();
+        EmpikParser parser = new EmpikParser();
         Document doc = Jsoup.parse(input, "UTF-8", "");
         parser.setDocument(doc);
-        List<String> result = parser.parseLinksToConcreteBookUrls();
+        List<String> result = parser.parseLinksToConcreteItems();
 
         assertEquals(expectedResult, result);
     }

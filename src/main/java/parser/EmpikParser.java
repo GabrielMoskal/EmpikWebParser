@@ -8,31 +8,73 @@ import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmpikEbookParser {
+public class EmpikParser implements EmpikParserInterface {
+    private static final String EMPIK_ROOT_URL = "http://www.empik.com";
     private Document document;
 
-    public EmpikEbookParser() {
+    public EmpikParser() {
         this.document = null;
     }
 
-    public EmpikEbookParser(String url) throws IOException {
-        setDocumentFromUrl(url);
-        preserveLineBreaks();
+    public EmpikParser(String url) throws IOException {
+        connectToGivenUrl(url);
+    }
+
+    public void connectToGivenUrl(String url) throws IOException {
+        if (!url.startsWith(EMPIK_ROOT_URL)) {
+            throw new MalformedURLException("setDocumentFromUrl(..) didn't get proper URL");
+        }
+        Connection connection = Jsoup.connect(url);
+        this.document = connection.get();
     }
 
     public void setDocument(Document document) {
         this.document = document;
     }
 
-    public void setDocumentFromUrl(String url) throws IOException {
-        Connection connection = Jsoup.connect(url);
-        this.document = connection.get();
+    public List<String> parseLinksToConcreteSubcategories() {
+        Elements labels = document.getElementsByClass("menuCategories");
+        List<String> concreteUrls = parseTagsFromElements(labels);
+        return concreteUrls;
     }
 
-    private void preserveLineBreaks() {
+    private List<String> parseTagsFromElements(Elements elements) {
+        if (elements == null) {
+            return null;
+        }
+        List<String> concreteUrls = new ArrayList<String>();
+        for (Element element : elements) {
+            Elements links = element.select("a[href]");
+            List<String> urls = parseUrlsFromElements(links);
+            concreteUrls.addAll(urls);
+        }
+        return concreteUrls;
+    }
+
+    private List<String> parseUrlsFromElements(Elements elements) {
+        if (elements == null) {
+            return null;
+        }
+        List<String> urls = new ArrayList<String>();
+        for (Element element : elements) {
+            String child = EMPIK_ROOT_URL + element.attr("href");
+            urls.add(child);
+        }
+        return urls;
+    }
+
+    public List<String> parseLinksToConcreteItems() {
+        Elements labels = document.getElementsByClass("productBox-450Title");
+        List<String> concreteUrls = parseTagsFromElements(labels);
+        return concreteUrls;
+    }
+
+    // to test and propably it should be public
+    public void preserveLineBreaks() {
         document.outputSettings(new Document.OutputSettings().prettyPrint(false));
         document.select("br").append("\\n");
         document.select("p").prepend("\\n\\n");
@@ -40,7 +82,7 @@ public class EmpikEbookParser {
         //return Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
     }
 
-    public List<Pair<String, String>> parseBookInfo() throws IOException {
+    public List<Pair<String, String>> parseConcreteItemInformation() {
         Element productMainInfo = document.getElementById("tabs");
         Pair<Elements, Elements> pairOfLabelsAndDetails = makePairOfLabelsAndDetails(productMainInfo);
         if (pairOfLabelsAndDetails == null) {
@@ -93,31 +135,4 @@ public class EmpikEbookParser {
         return result;
     }
 
-    public List<String> parseLinksToConcreteBookUrls() {
-        String rootUrl = "http://www.empik.com";
-        Elements labels = document.getElementsByClass("productBox-450Title");
-        List<String> concreteUrls = new ArrayList<String>();
-        for (Element element : labels) {
-            Elements links = element.select("a[href]");
-            for (Element link : links) {
-                String child = rootUrl + link.attr("href");
-                concreteUrls.add(child);
-            }
-        }
-        return concreteUrls;
-    }
-
-    public List<String> parseLinksToConcreteCategories() {
-        String rootUrl = "http://www.empik.com";
-        Elements labels = document.getElementsByClass("menuCategories");
-        List<String> concreteUrls = new ArrayList<String>();
-        for (Element element : labels) {
-            Elements links = element.select("a[href]");
-            for (Element link : links) {
-                String child = rootUrl + link.attr("href");
-                concreteUrls.add(child);
-            }
-        }
-        return concreteUrls;
-    }
 }

@@ -5,7 +5,33 @@ import java.util.List;
 
 public class TestDrive {
     public static void main(String[] args) throws IOException {
-        EmpikEbookParser parser = new EmpikEbookParser("http://www.empik.com/ebooki");
+
+        EmpikParser parser = new EmpikParser("http://www.empik.com/elektronika");
+
+        List<String> links = parser.parseLinksToConcreteSubcategories();
+        for (String link : links) {
+            //System.out.println(link);
+            parser.connectToGivenUrl(link);
+            List<String> concreteBookUrls = parser.parseLinksToConcreteItems();
+            if (concreteBookUrls == null) {
+                continue;
+            }
+
+            for (String concreteUrl : concreteBookUrls) {
+                parser.connectToGivenUrl(concreteUrl);
+                List<Pair<String, String>> booksInfo = parser.parseConcreteItemInformation();
+                if (booksInfo == null) {
+                    continue;
+                }
+                for (Pair<String, String> bookInfo : booksInfo) {
+                    System.out.println(bookInfo);
+                }
+            }
+
+        }
+
+        /*
+        EmpikParser parser = new EmpikParser("http://www.empik.com/ebooki");
         List<String> links = parser.parseLinksToConcreteCategories();
         int count = 0;
         for (String link : links) {
@@ -83,9 +109,9 @@ public class TestDrive {
     }
     public static void parseConcreteEbook(String url) throws IOException {
         String tempUrl = "http://www.empik.com/angielski-dla-uczniow-szkol-podstawowych-boguslawska-joanna,p1136241152,ebooki-i-mp3-p";
-        EmpikEbookParser empikEbookParser = new EmpikEbookParser(url);
-        String description = empikEbookParser.parseBookDescription();
-        List<Pair<String, String>> bookInfo = empikEbookParser.parseBookInfo();
+        EmpikParser empikParser = new EmpikParser(url);
+        String description = empikParser.parseBookDescription();
+        List<Pair<String, String>> bookInfo = empikParser.parseConcreteItemInformation();
         System.out.println(description);
         for (Pair<String, String> pair : bookInfo) {
             System.out.println(pair);
