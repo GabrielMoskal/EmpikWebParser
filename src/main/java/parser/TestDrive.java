@@ -11,14 +11,14 @@ public class TestDrive {
         List<String> links = parser.parseLinksToConcreteSubcategories();
         for (String link : links) {
             //System.out.println(link);
-            parser.connectToGivenUrl(link);
+            parser.connect(link);
             List<String> concreteBookUrls = parser.parseLinksToConcreteItems();
             if (concreteBookUrls == null) {
                 continue;
             }
 
             for (String concreteUrl : concreteBookUrls) {
-                parser.connectToGivenUrl(concreteUrl);
+                parser.connect(concreteUrl);
                 List<Pair<String, String>> booksInfo = parser.parseConcreteItemInformation();
                 if (booksInfo == null) {
                     continue;
@@ -106,27 +106,6 @@ public class TestDrive {
             print(" * a: <%s>  (%s)", link.attr("abs:href"), trim(link.text(), 35));
         }
         */
-    }
-    public static void parseConcreteEbook(String url) throws IOException {
-        String tempUrl = "http://www.empik.com/angielski-dla-uczniow-szkol-podstawowych-boguslawska-joanna,p1136241152,ebooki-i-mp3-p";
-        EmpikParser empikParser = new EmpikParser(url);
-        String description = empikParser.parseBookDescription();
-        List<Pair<String, String>> bookInfo = empikParser.parseConcreteItemInformation();
-        System.out.println(description);
-        for (Pair<String, String> pair : bookInfo) {
-            System.out.println(pair);
-        }
-    }
-
-    private static void print(String msg, Object... args) {
-        System.out.println(String.format(msg, args));
-    }
-
-    private static String trim(String s, int width) {
-        if (s.length() > width)
-            return s.substring(0, width-1) + ".";
-        else
-            return s;
     }
 }
 

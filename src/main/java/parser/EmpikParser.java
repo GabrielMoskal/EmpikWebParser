@@ -21,10 +21,10 @@ public class EmpikParser implements EmpikParserInterface {
     }
 
     public EmpikParser(String url) throws IOException {
-        connectToGivenUrl(url);
+        connect(url);
     }
 
-    public void connectToGivenUrl(String url) throws IOException {
+    public void connect(String url) throws IOException {
         if (!url.startsWith(EMPIK_ROOT_URL)) {
             throw new MalformedURLException("setDocumentFromUrl(..) didn't get proper URL");
         }
@@ -38,11 +38,10 @@ public class EmpikParser implements EmpikParserInterface {
 
     public List<String> parseLinksToConcreteSubcategories() {
         Elements labels = document.getElementsByClass("menuCategories");
-        List<String> concreteUrls = parseTagsFromElements(labels);
-        return concreteUrls;
+        return parseLinks(labels);
     }
 
-    private List<String> parseTagsFromElements(Elements elements) {
+    private List<String> parseLinks(Elements elements) {
         if (elements == null) {
             return null;
         }
@@ -69,27 +68,16 @@ public class EmpikParser implements EmpikParserInterface {
 
     public List<String> parseLinksToConcreteItems() {
         Elements labels = document.getElementsByClass("productBox-450Title");
-        List<String> concreteUrls = parseTagsFromElements(labels);
-        return concreteUrls;
-    }
-
-    // to test and propably it should be public
-    public void preserveLineBreaks() {
-        document.outputSettings(new Document.OutputSettings().prettyPrint(false));
-        document.select("br").append("\\n");
-        document.select("p").prepend("\\n\\n");
-        //String s = document.html().replaceAll("\\\\n", "\n");
-        //return Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+        return parseLinks(labels);
     }
 
     public List<Pair<String, String>> parseConcreteItemInformation() {
         Element productMainInfo = document.getElementById("tabs");
-        Pair<Elements, Elements> pairOfLabelsAndDetails = makePairOfLabelsAndDetails(productMainInfo);
-        if (pairOfLabelsAndDetails == null) {
+        Pair<Elements, Elements> labelsAndDetails = makePairOfLabelsAndDetails(productMainInfo);
+        if (labelsAndDetails == null) {
             return null;
         }
-        List<Pair<String, String>> bookInfo = makeBookInfo(pairOfLabelsAndDetails);
-        return bookInfo;
+        return makeBookInfo(labelsAndDetails);
     }
 
     private Pair<Elements, Elements> makePairOfLabelsAndDetails(Element productMainInfo) {
@@ -98,10 +86,10 @@ public class EmpikParser implements EmpikParserInterface {
         }
         Elements labels = productMainInfo.getElementsByClass("productDetailsLabel");
         Elements details = productMainInfo.getElementsByClass("productDetailsValue");
-        Pair<Elements, Elements> pairOfLabelsAndDetails = new Pair<Elements, Elements>();
-        pairOfLabelsAndDetails.setObject1(labels);
-        pairOfLabelsAndDetails.setObject2(details);
-        return pairOfLabelsAndDetails;
+        Pair<Elements, Elements> labelsAndDetails = new Pair<Elements, Elements>();
+        labelsAndDetails.setObject1(labels);
+        labelsAndDetails.setObject2(details);
+        return labelsAndDetails;
     }
 
     private List<Pair<String, String>> makeBookInfo(Pair<Elements, Elements> pairOfLabelsAndDetails) {
@@ -110,13 +98,13 @@ public class EmpikParser implements EmpikParserInterface {
         return bookInfo;
     }
 
-    private void fillBookInfoWithProperLabelsAndDetails(List<Pair<String, String>> bookInfo, Pair<Elements, Elements> pairOfLabelsAndDetails) {
+    private void fillBookInfoWithProperLabelsAndDetails(List<Pair<String, String>> itemInfo, Pair<Elements, Elements> pairOfLabelsAndDetails) {
         Elements labels = pairOfLabelsAndDetails.getObject1();
         Elements details = pairOfLabelsAndDetails.getObject2();
         int loopFinish = labels.size();
         for (int i = 0; i < loopFinish; i++) {
             Pair<String, String> labelAndDetail = getLabelAndDetail(labels, details, i);
-            bookInfo.add(labelAndDetail);
+            itemInfo.add(labelAndDetail);
         }
     }
 
@@ -127,12 +115,17 @@ public class EmpikParser implements EmpikParserInterface {
         return result;
     }
 
-    public String parseBookDescription() {
+    public String parseItemDescription() {
         Element productMainInfo = document.getElementById("tabs");
         Elements description = productMainInfo.getElementsByClass("contentPacketText longDescription");
-        String result = description.text().replaceAll("\\\\n", "\n");
-        Jsoup.clean(result, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
-        return result;
+        return preserveLineBreaks(description);
     }
 
+    private String preserveLineBreaks(Elements elements) {
+        document.outputSettings(new Document.OutputSettings().prettyPrint(false));
+        document.select("br").append("\\n");
+        document.select("p").prepend("\\n\\n");
+        String result = elements.text().replaceAll("\\\\n", "\n");
+        return Jsoup.clean(result, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+    }
 }
