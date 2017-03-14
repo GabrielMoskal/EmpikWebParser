@@ -51,7 +51,7 @@ public class EmpikParserTest {
         String result = null;
         try {
             EmpikParser parser = new EmpikParser(url);
-            result = parser.parseItemDescription();
+            result = parser.parseConcreteItemDescription();
         } catch (IOException e) {
             e.printStackTrace();
         }

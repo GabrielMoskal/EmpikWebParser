@@ -115,7 +115,7 @@ public class EmpikParser implements EmpikParserInterface {
         return result;
     }
 
-    public String parseItemDescription() {
+    public String parseConcreteItemDescription() {
         Element productMainInfo = document.getElementById("tabs");
         Elements description = productMainInfo.getElementsByClass("contentPacketText longDescription");
         return preserveLineBreaks(description);

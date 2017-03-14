@@ -10,5 +10,5 @@ public interface EmpikParserInterface {
     List<String> parseLinksToConcreteSubcategories();
     List<String> parseLinksToConcreteItems();
     List<Pair<String, String>> parseConcreteItemInformation();
-    //String parseConcreteItemDescription();
+    String parseConcreteItemDescription();
 }
