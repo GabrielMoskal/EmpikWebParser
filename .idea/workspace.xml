@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f89f37e-4529-4d6f-880a-8bd15fd418a1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/parser/EmpikParserTest.java" afterPath="$PROJECT_DIR$/src/test/java/parser/EmpikParserTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/parser/PageWithLinksToConcreteEbooks.html" afterPath="$PROJECT_DIR$/src/test/java/parser/PageWithLinksToConcreteEbooks.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/parser/EmpikParser.java" afterPath="$PROJECT_DIR$/src/main/java/parser/EmpikParser.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -50,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmpikParser.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EmpikParser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/parser/EmpikParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="127" column="10" lean-forward="true" selection-start-line="127" selection-start-column="10" selection-end-line="127" selection-end-column="10" />
+            <state relative-caret-position="-1880">
+              <caret line="30" column="8" lean-forward="true" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -72,10 +71,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmpikParserTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EmpikParserTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/parser/EmpikParserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
+            <state relative-caret-position="1144">
               <caret line="60" column="100" lean-forward="false" selection-start-line="60" selection-start-column="100" selection-end-line="60" selection-end-column="100" />
               <folding />
             </state>
@@ -131,10 +130,10 @@
         <option value="$PROJECT_DIR$/src/test/java/parser/EmpikEbookParserTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/parser/EmpikEbookParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/parser/EmpikParserInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/parser/EmpikParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/parser/TestDrive.java" />
         <option value="$PROJECT_DIR$/src/test/java/parser/EmpikParserTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/parser/PageWithLinksToConcreteEbooks.html" />
+        <option value="$PROJECT_DIR$/src/main/java/parser/EmpikParser.java" />
       </list>
     </option>
   </component>
@@ -746,7 +745,7 @@
       <workItem from="1489880981471" duration="425000" />
       <workItem from="1490278265298" duration="5749000" />
       <workItem from="1490284788290" duration="222000" />
-      <workItem from="1490477348921" duration="2836000" />
+      <workItem from="1490477348921" duration="2924000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;added concrete ebook parser&quot;">
       <created>1488362544083</created>
@@ -766,7 +765,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71481000" />
+    <option name="totallyTimeSpent" value="71569000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1157,16 +1156,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/parser/EmpikParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="127" column="10" lean-forward="true" selection-start-line="127" selection-start-column="10" selection-end-line="127" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
@@ -1185,9 +1174,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/parser/EmpikParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
+        <state relative-caret-position="1144">
           <caret line="60" column="100" lean-forward="false" selection-start-line="60" selection-start-column="100" selection-end-line="60" selection-end-column="100" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/parser/EmpikParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1880">
+          <caret line="30" column="8" lean-forward="true" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

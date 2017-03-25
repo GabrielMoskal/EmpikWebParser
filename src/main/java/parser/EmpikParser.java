@@ -25,11 +25,10 @@ public class EmpikParser implements EmpikParserInterface {
     }
 
     public void connect(String url) throws IOException {
-        /*
         if (!url.startsWith(EMPIK_ROOT_URL)) {
             throw new MalformedURLException("setDocumentFromUrl(..) didn't get proper URL");
         }
-        */
+        
         Connection connection = Jsoup.connect(url);
         this.document = connection.get();
     }
@@ -69,16 +68,13 @@ public class EmpikParser implements EmpikParserInterface {
     }
 
     public List<String> parseLinksToConcreteItems() {
-        //Elements labels = document.getElementsByClass("productBox-450Title");
         Elements labels = document.getElementsByClass("title");
         return parseLinks(labels);
     }
 
     public List<Pair<String, String>> parseConcreteItemInformation() {
-        //Element productMainInfo = document.getElementById("tabs");
         Element productMainInfo = document.getElementById("layoutContent");
         Pair<Elements, Elements> labelsAndDetails = makePairOfLabelsAndDetails(productMainInfo);
-        //Pair<Elements, Elements> labelsAndDetails = makePairOfLabelsAndDetails(document);
         if (labelsAndDetails == null) {
             return null;
         }
@@ -92,9 +88,6 @@ public class EmpikParser implements EmpikParserInterface {
         }
         Elements labels = productMainInfo.getElementsByClass("productDetailsLabel");
         Elements details = productMainInfo.getElementsByClass("productDetailsValue");
-        for (Element element : labels) {
-            //System.out.println(element + "KONIEC!!!");
-        }
         Pair<Elements, Elements> labelsAndDetails = new Pair<Elements, Elements>();
         labelsAndDetails.setObject1(labels);
         labelsAndDetails.setObject2(details);
@@ -125,12 +118,6 @@ public class EmpikParser implements EmpikParserInterface {
     }
 
     public String parseConcreteItemDescription() {
-        /*
-        Element productMainInfo = document.getElementById("tabs");
-        if (productMainInfo == null) {
-            return null;
-        }
-        */
         Elements description = document.getElementsByClass("productDescriptionText");
         return preserveLineBreaks(description);
     }
