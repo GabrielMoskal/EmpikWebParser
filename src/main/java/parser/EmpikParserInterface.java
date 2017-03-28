@@ -1,6 +1,7 @@
 package parser;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Gabriel on 14.03.2017.
@@ -8,6 +9,6 @@ import java.util.List;
 public interface EmpikParserInterface {
     List<String> parseLinksToConcreteSubcategories();
     List<String> parseLinksToConcreteItems();
-    List<Pair<String, String>> parseConcreteItemInformation();
+    Map<String, String> parseConcreteItemInformation();
     String parseConcreteItemDescription();
 }

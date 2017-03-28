@@ -10,7 +10,9 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EmpikParser implements EmpikParserInterface {
     private static final String EMPIK_ROOT_URL = "http://m.empik.com";
@@ -25,10 +27,6 @@ public class EmpikParser implements EmpikParserInterface {
     }
 
     public void connect(String url) throws IOException {
-        if (!url.startsWith(EMPIK_ROOT_URL)) {
-            throw new MalformedURLException("setDocumentFromUrl(..) didn't get proper URL");
-        }
-        
         Connection connection = Jsoup.connect(url);
         this.document = connection.get();
     }
@@ -72,7 +70,7 @@ public class EmpikParser implements EmpikParserInterface {
         return parseLinks(labels);
     }
 
-    public List<Pair<String, String>> parseConcreteItemInformation() {
+    public Map<String, String> parseConcreteItemInformation() {
         Element productMainInfo = document.getElementById("layoutContent");
         Pair<Elements, Elements> labelsAndDetails = makePairOfLabelsAndDetails(productMainInfo);
         if (labelsAndDetails == null) {
@@ -94,19 +92,19 @@ public class EmpikParser implements EmpikParserInterface {
         return labelsAndDetails;
     }
 
-    private List<Pair<String, String>> makeBookInfo(Pair<Elements, Elements> pairOfLabelsAndDetails) {
-        List<Pair<String, String>> bookInfo = new ArrayList<Pair<String, String>>();
+    private Map<String, String> makeBookInfo(Pair<Elements, Elements> pairOfLabelsAndDetails) {
+        Map<String, String> bookInfo = new HashMap<String, String>();
         fillBookInfoWithProperLabelsAndDetails(bookInfo, pairOfLabelsAndDetails);
         return bookInfo;
     }
 
-    private void fillBookInfoWithProperLabelsAndDetails(List<Pair<String, String>> itemInfo, Pair<Elements, Elements> pairOfLabelsAndDetails) {
+    private void fillBookInfoWithProperLabelsAndDetails(Map<String, String> itemInfo, Pair<Elements, Elements> pairOfLabelsAndDetails) {
         Elements labels = pairOfLabelsAndDetails.getObject1();
         Elements details = pairOfLabelsAndDetails.getObject2();
         int loopFinish = labels.size();
         for (int i = 0; i < loopFinish; i++) {
             Pair<String, String> labelAndDetail = getLabelAndDetail(labels, details, i);
-            itemInfo.add(labelAndDetail);
+            itemInfo.put(labelAndDetail.getObject1(), labelAndDetail.getObject2());
         }
     }
 

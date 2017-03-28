@@ -1,7 +1,9 @@
 package parser;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class TestDrive {
     public static void main(String[] args) throws IOException {
@@ -11,17 +13,18 @@ public class TestDrive {
             parser.connect(link);
             List<String> concreteBookUrls = parser.parseLinksToConcreteItems();
             for (String concreteUrl : concreteBookUrls) {
-                System.out.println(concreteUrl);
+                //System.out.println(concreteUrl);
                 parser.connect(concreteUrl);
                 String itemDescription = parser.parseConcreteItemDescription();
-                List<Pair<String, String>> booksInfo = parser.parseConcreteItemInformation();
+                Map<String, String> booksInfo = parser.parseConcreteItemInformation();
                 if (booksInfo == null) {
                     continue;
                 }
-                for (Pair<String, String> bookInfo : booksInfo) {
+                Collection<String> values = booksInfo.keySet();
+                for (String bookInfo : values) {
                     System.out.println(bookInfo);
                 }
-                System.out.println(itemDescription);
+                //System.out.println(itemDescription);
             }
         }
     }
