@@ -8,11 +8,7 @@ import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EmpikParser implements EmpikParserInterface {
     private static final String EMPIK_ROOT_URL = "http://m.empik.com";
@@ -41,10 +37,7 @@ public class EmpikParser implements EmpikParserInterface {
     }
 
     private List<String> parseLinks(Elements elements) {
-        if (elements == null) {
-            return null;
-        }
-        List<String> concreteUrls = new ArrayList<String>();
+        List<String> concreteUrls = new ArrayList<>();
         for (Element element : elements) {
             Elements links = element.select("a[href]");
             List<String> urls = parseUrlsFromElements(links);
@@ -54,10 +47,7 @@ public class EmpikParser implements EmpikParserInterface {
     }
 
     private List<String> parseUrlsFromElements(Elements elements) {
-        if (elements == null) {
-            return null;
-        }
-        List<String> urls = new ArrayList<String>();
+        List<String> urls = new ArrayList<>();
         for (Element element : elements) {
             String child = EMPIK_ROOT_URL + element.attr("href");
             urls.add(child);
@@ -72,28 +62,24 @@ public class EmpikParser implements EmpikParserInterface {
 
     public Map<String, String> parseConcreteItemInformation() {
         Element productMainInfo = document.getElementById("layoutContent");
-        Pair<Elements, Elements> labelsAndDetails = makePairOfLabelsAndDetails(productMainInfo);
-        if (labelsAndDetails == null) {
-            return null;
+        if (productMainInfo == null) {
+            return Collections.emptyMap();
         }
+        Pair<Elements, Elements> labelsAndDetails = makePairOfLabelsAndDetails(productMainInfo);
         return makeBookInfo(labelsAndDetails);
     }
 
     private Pair<Elements, Elements> makePairOfLabelsAndDetails(Element productMainInfo) {
-        if (productMainInfo == null) {
-            System.out.print(productMainInfo);
-            return null;
-        }
         Elements labels = productMainInfo.getElementsByClass("productDetailsLabel");
         Elements details = productMainInfo.getElementsByClass("productDetailsValue");
-        Pair<Elements, Elements> labelsAndDetails = new Pair<Elements, Elements>();
+        Pair<Elements, Elements> labelsAndDetails = new Pair<>();
         labelsAndDetails.setObject1(labels);
         labelsAndDetails.setObject2(details);
         return labelsAndDetails;
     }
 
     private Map<String, String> makeBookInfo(Pair<Elements, Elements> pairOfLabelsAndDetails) {
-        Map<String, String> bookInfo = new HashMap<String, String>();
+        Map<String, String> bookInfo = new HashMap<>();
         fillBookInfoWithProperLabelsAndDetails(bookInfo, pairOfLabelsAndDetails);
         return bookInfo;
     }
@@ -109,7 +95,7 @@ public class EmpikParser implements EmpikParserInterface {
     }
 
     private Pair<String, String> getLabelAndDetail(Elements labels, Elements details, int index) {
-        Pair<String, String> result = new Pair<String, String>();
+        Pair<String, String> result = new Pair<>();
         result.setObject1(labels.get(index).text());
         result.setObject2(details.get(index).text());
         return result;
@@ -121,9 +107,6 @@ public class EmpikParser implements EmpikParserInterface {
     }
 
     private String preserveLineBreaks(Elements elements) {
-        if (elements == null) {
-            return null;
-        }
         document.outputSettings(new Document.OutputSettings().prettyPrint(false));
         document.select("br").append("\\n");
         document.select("p").prepend("\\n\\n");

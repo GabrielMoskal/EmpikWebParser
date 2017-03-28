@@ -17,9 +17,7 @@ public class TestDrive {
                 parser.connect(concreteUrl);
                 String itemDescription = parser.parseConcreteItemDescription();
                 Map<String, String> booksInfo = parser.parseConcreteItemInformation();
-                if (booksInfo == null) {
-                    continue;
-                }
+
                 Collection<String> values = booksInfo.keySet();
                 for (String bookInfo : values) {
                     System.out.println(bookInfo);

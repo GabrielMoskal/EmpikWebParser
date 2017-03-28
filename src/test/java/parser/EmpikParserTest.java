@@ -16,7 +16,7 @@ public class EmpikParserTest {
 
     @Test
     public void parseBookInfoTest() {
-        Map<String,String> expectedResult = new HashMap<String, String>();
+        Map<String,String> expectedResult = new HashMap<>();
         expectedResult.put("Tytuł:", "W kręgach władzy. Tom 1. Wotum nieufności");
         expectedResult.put("Autor:", "Mróz Remigiusz");
         expectedResult.put("Wydawnictwo:", "Filia");
@@ -59,7 +59,7 @@ public class EmpikParserTest {
 
     @Test
     public void parseLinksToConcreteBookUrls() throws IOException {
-        List<String> expectedResult = new ArrayList<String>();
+        List<String> expectedResult = new ArrayList<>();
         expectedResult.add("http://m.empik.com/inwigilacja-mroz-remigiusz,p1137827825,ebooki-i-mp3-p");
         expectedResult.add("http://m.empik.com/kasacja-mroz-remigiusz,p1106211525,ebooki-i-mp3-p");
 
