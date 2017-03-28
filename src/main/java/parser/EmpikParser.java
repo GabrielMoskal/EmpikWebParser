@@ -14,17 +14,21 @@ public class EmpikParser implements EmpikParserInterface {
     private static final String EMPIK_ROOT_URL = "http://m.empik.com";
     private Document document;
 
-    public EmpikParser() {
-        this.document = null;
-    }
-
-    public EmpikParser(String url) throws IOException {
+    public EmpikParser(String url) {
         connect(url);
     }
 
-    public void connect(String url) throws IOException {
+    public EmpikParser(Document document) {
+        setDocument(document);
+    }
+
+    public void connect(String url) {
         Connection connection = Jsoup.connect(url);
-        this.document = connection.get();
+        try {
+            this.document = connection.get();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setDocument(Document document) {

@@ -30,13 +30,9 @@ public class EmpikParserTest {
         expectedResult.put("Indeks:", "20837181");
 
         String url = "http://m.empik.com/w-kregach-wladzy-tom-1-wotum-nieufnosci-mroz-remigiusz,p1135880608,ebooki-i-mp3-p";
-        Map<String, String> result = null;
-        try {
-            EmpikParser parser = new EmpikParser(url);
-            result = parser.parseConcreteItemInformation();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        EmpikParser parser = new EmpikParser(url);
+        Map<String, String> result = parser.parseConcreteItemInformation();
+
         assertEquals(expectedResult, result);
     }
 
@@ -47,13 +43,9 @@ public class EmpikParserTest {
                 "Seyda i Hauer znajdują się po przeciwnych stronach sceny politycznej. Dzieli ich wszystko, ale połączy jedna sprawa…";
 
         String url = "http://m.empik.com/w-kregach-wladzy-tom-1-wotum-nieufnosci-mroz-remigiusz,p1135880608,ebooki-i-mp3-p";
-        String result = null;
-        try {
-            EmpikParser parser = new EmpikParser(url);
-            result = parser.parseConcreteItemDescription();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        EmpikParser parser = new EmpikParser(url);
+        String result = parser.parseConcreteItemDescription();
+
         assertEquals(expectedResult, result);
     }
 
@@ -67,9 +59,8 @@ public class EmpikParserTest {
         filePath = filePath + "\\src\\test\\java\\parser\\PageWithLinksToConcreteEbooks.html";
         File input = new File(filePath);
 
-        EmpikParser parser = new EmpikParser();
         Document doc = Jsoup.parse(input, "UTF-8", "");
-        parser.setDocument(doc);
+        EmpikParser parser = new EmpikParser(doc);
         List<String> result = parser.parseLinksToConcreteItems();
 
         assertEquals(expectedResult, result);
