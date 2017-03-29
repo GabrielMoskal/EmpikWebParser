@@ -14,6 +14,10 @@ public class EmpikParser implements EmpikParserInterface {
     private static final String EMPIK_ROOT_URL = "http://m.empik.com";
     private Document document;
 
+    public EmpikParser() {
+        this.document = null;
+    }
+
     public EmpikParser(String url) {
         connect(url);
     }
