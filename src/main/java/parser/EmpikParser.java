@@ -26,6 +26,12 @@ public class EmpikParser implements EmpikParserInterface {
         setDocument(document);
     }
 
+    /**
+     * Connects parser to concrete page, passed by argument
+     * @param url to concrete page
+     *
+     * @throws RuntimeException if IOException occurs, can't recover with given auto-generated links
+     */
     public void connect(String url) {
         Connection connection = Jsoup.connect(url);
         try {
@@ -39,11 +45,20 @@ public class EmpikParser implements EmpikParserInterface {
         this.document = document;
     }
 
+    /**
+     *
+     * @return parsed links to concrete item categories or empty if not found
+     */
     public List<String> parseLinksToConcreteSubcategories() {
         Elements labels = document.getElementsByClass("categoryFacetList");
         return parseLinks(labels);
     }
 
+    /**
+     *
+     * @param elements which
+     * @return List of Strings which contains parsed links or empty if not found
+     */
     private List<String> parseLinks(Elements elements) {
         List<String> concreteUrls = new ArrayList<>();
         for (Element element : elements) {
@@ -63,11 +78,28 @@ public class EmpikParser implements EmpikParserInterface {
         return urls;
     }
 
+    /**
+     * Recursive function, which goes to next pages by checking, if there is link to the next item page
+     * @return List with links to all concrete items in selected category
+     */
     public List<String> parseLinksToConcreteItems() {
         Elements labels = document.getElementsByClass("title");
-        return parseLinks(labels);
+        List<String> result = parseLinks(labels);
+        Elements nextPageLinkElements = document.getElementsByClass("next");
+        if (nextPageLinkElements.isEmpty() == false) {
+            String linkToNextPage = parseLinks(nextPageLinkElements).get(0);
+            connect(linkToNextPage);
+            result.addAll(parseLinksToConcreteItems());
+        }
+        return result;
     }
 
+    /**
+     *
+     * @return Map with strings which contains full description of item,
+     * map keys are name of item being described on the page,
+     * empty if no item found
+     */
     public Map<String, String> parseConcreteItemInformation() {
         Element productMainInfo = document.getElementById("layoutContent");
         if (productMainInfo == null) {
@@ -109,6 +141,10 @@ public class EmpikParser implements EmpikParserInterface {
         return result;
     }
 
+    /**
+     *
+     * @return String with description of concrete item from link which this is connected to
+     */
     public String parseConcreteItemDescription() {
         Elements description = document.getElementsByClass("productDescriptionText");
         return preserveLineBreaks(description);
