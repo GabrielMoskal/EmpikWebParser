@@ -5,11 +5,9 @@ import org.jsoup.nodes.Document;
 import org.junit.Test;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class EmpikParserTest {
@@ -61,8 +59,8 @@ public class EmpikParserTest {
 
         Document doc = Jsoup.parse(input, "UTF-8", "");
         EmpikParser parser = new EmpikParser(doc);
-        List<String> result = parser.parseLinksToConcreteItems();
+        Map<String, String> result = parser.parseLinksToConcreteItems();
 
-        assertEquals(expectedResult, result);
+        assertArrayEquals(expectedResult.toArray(), result.values().toArray());
     }
 }

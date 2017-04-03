@@ -8,8 +8,8 @@ import java.util.Map;
  */
 public interface EmpikParserInterface {
     void connect(String url);
-    List<String> parseLinksToConcreteSubcategories();
-    List<String> parseLinksToConcreteItems();
+    Map<String, String> parseLinksToConcreteSubcategories();
+    Map<String, String> parseLinksToConcreteItems();
     Map<String, String> parseConcreteItemInformation();
     String parseConcreteItemDescription();
 }

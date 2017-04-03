@@ -49,7 +49,7 @@ public class EmpikParser implements EmpikParserInterface {
      *
      * @return parsed links to concrete item categories or empty if not found
      */
-    public List<String> parseLinksToConcreteSubcategories() {
+    public Map<String, String> parseLinksToConcreteSubcategories() {
         Elements labels = document.getElementsByClass("categoryFacetList");
         return parseLinks(labels);
     }
@@ -59,37 +59,38 @@ public class EmpikParser implements EmpikParserInterface {
      * @param elements which
      * @return List of Strings which contains parsed links or empty if not found
      */
-    private List<String> parseLinks(Elements elements) {
-        List<String> concreteUrls = new ArrayList<>();
+    private Map<String, String> parseLinks(Elements elements) {
+        Map<String, String> concreteUrls = new HashMap<>();
         for (Element element : elements) {
             Elements links = element.select("a[href]");
-            List<String> urls = parseUrlsFromElements(links);
-            concreteUrls.addAll(urls);
+            Map<String, String> urls = parseUrlsAndLabelsFromElements(links);
+            concreteUrls.putAll(urls);
         }
         return concreteUrls;
     }
 
-    private List<String> parseUrlsFromElements(Elements elements) {
-        List<String> urls = new ArrayList<>();
+    private Map<String, String> parseUrlsAndLabelsFromElements(Elements elements) {
+        Map<String, String> hrefs = new HashMap<>();
         for (Element element : elements) {
-            String child = EMPIK_ROOT_URL + element.attr("href");
-            urls.add(child);
+            String url = EMPIK_ROOT_URL + element.attr("href");
+            String description = element.text();
+            hrefs.put(description, url);
         }
-        return urls;
+        return hrefs;
     }
 
     /**
      * Recursive function, which goes to next pages by checking, if there is link to the next item page
      * @return List with links to all concrete items in selected category
      */
-    public List<String> parseLinksToConcreteItems() {
+    public Map<String, String> parseLinksToConcreteItems() {
         Elements labels = document.getElementsByClass("title");
-        List<String> result = parseLinks(labels);
+        Map<String, String> result = parseLinks(labels);
         Elements nextPageLinkElements = document.getElementsByClass("next");
         if (nextPageLinkElements.isEmpty() == false) {
             String linkToNextPage = parseLinks(nextPageLinkElements).get(0);
             connect(linkToNextPage);
-            result.addAll(parseLinksToConcreteItems());
+            result.putAll(parseLinksToConcreteItems());
         }
         return result;
     }
@@ -152,7 +153,7 @@ public class EmpikParser implements EmpikParserInterface {
 
     private String preserveLineBreaks(Elements elements) {
         document.outputSettings(new Document.OutputSettings().prettyPrint(false));
-        document.select("br").append("\\n");
+        document.select("br").append("\\\\n");
         document.select("p").prepend("\\n\\n");
         String result = elements.text().replaceAll("\\\\n", "\n");
         return Jsoup.clean(result, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));

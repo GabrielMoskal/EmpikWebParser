@@ -7,9 +7,11 @@ public class TestDrive {
     public static void main(String[] args) {
         Long test = null;
         EmpikParser parser = new EmpikParser("http://m.empik.com/ebooki/kategorie");
-        List<String> links = parser.parseLinksToConcreteSubcategories();
+        Map<String, String> links = parser.parseLinksToConcreteSubcategories();
         int count = 0;
-        for (String link : links) {
+        for (String link : links.keySet()) {
+            System.out.println(link);
+            /*
             parser.connect(link);
             List<String> concreteBookUrls = parser.parseLinksToConcreteItems();
             for (String concreteUrl : concreteBookUrls) {
@@ -21,6 +23,7 @@ public class TestDrive {
                 System.out.println(link);
                 //System.out.println(itemDescription);
             }
+            */
         }
     }
 }
