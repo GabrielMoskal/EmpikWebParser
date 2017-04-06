@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7f89f37e-4529-4d6f-880a-8bd15fd418a1" name="Default" comment="Now parses link to book image.">
+    <list default="true" id="7f89f37e-4529-4d6f-880a-8bd15fd418a1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/parser/EmpikParser.java" afterPath="$PROJECT_DIR$/src/main/java/parser/EmpikParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/parser/EmpikParserInterface.java" afterPath="$PROJECT_DIR$/src/main/java/parser/EmpikParserInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/parser/TestDrive.java" afterPath="$PROJECT_DIR$/src/main/java/parser/TestDrive.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -70,8 +68,8 @@
       <file leaf-file-name="EmpikParser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/parser/EmpikParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="89" column="12" lean-forward="false" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="12" />
+            <state relative-caret-position="-73">
+              <caret line="95" column="22" lean-forward="true" selection-start-line="95" selection-start-column="22" selection-end-line="95" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#515#516#0" expanded="true" />
@@ -798,7 +796,7 @@
       <workItem from="1491246880587" duration="5530000" />
       <workItem from="1491295718838" duration="616000" />
       <workItem from="1491325182724" duration="6245000" />
-      <workItem from="1491469790061" duration="2337000" />
+      <workItem from="1491469790061" duration="2409000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;added concrete ebook parser&quot;">
       <created>1488362544083</created>
@@ -828,14 +826,22 @@
       <option name="project" value="LOCAL" />
       <updated>1490983586757</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Now parses link to book image.">
+      <created>1491472501463</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1491472501463</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108514000" />
+    <option name="totallyTimeSpent" value="108586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1924" height="1047" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1282,8 +1288,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/parser/EmpikParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="89" column="12" lean-forward="false" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="12" />
+        <state relative-caret-position="-73">
+          <caret line="95" column="22" lean-forward="true" selection-start-line="95" selection-start-column="22" selection-end-line="95" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#515#516#0" expanded="true" />

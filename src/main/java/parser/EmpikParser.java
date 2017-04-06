@@ -86,10 +86,10 @@ public class EmpikParser implements EmpikParserInterface {
     public Map<String, String> parseLinksToConcreteItems() {
         Elements labels = document.getElementsByClass("title");
         Map<String, String> result = parseLinks(labels);
-        Elements nextPageLinkElements = document.getElementsByClass("next");
-        if (nextPageLinkElements.isEmpty() == false) {
+        Elements nextPageLink = document.getElementsByClass("next");
+        if (nextPageLink.isEmpty() == false) {
             // key to next is empty, there is only one key
-            String linkToNextPage = parseLinks(nextPageLinkElements).get("");
+            String linkToNextPage = parseLinks(nextPageLink).get("");
             connect(linkToNextPage);
             result.putAll(parseLinksToConcreteItems());
         }
