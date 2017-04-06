@@ -152,6 +152,16 @@ public class EmpikParser implements EmpikParserInterface {
         return preserveLineBreaks(description);
     }
 
+    public String parseConcreteItemImageUrl() {
+        Elements imageClasses = document.getElementsByClass("productGalleryImage oneImage");
+        Element imageClass = imageClasses.first();
+        if (imageClass == null) {
+            return "";
+        }
+        Elements imageSource = imageClass.select("img[src]");
+        return imageSource.attr("src");
+    }
+
     private String preserveLineBreaks(Elements elements) {
         document.outputSettings(new Document.OutputSettings().prettyPrint(false));
         document.select("br").append("\\\\n");

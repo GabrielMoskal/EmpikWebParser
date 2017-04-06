@@ -11,4 +11,5 @@ public interface EmpikParserInterface {
     Map<String, String> parseLinksToConcreteItems();
     Map<String, String> parseConcreteItemInformation();
     String parseConcreteItemDescription();
+    String parseConcreteItemImageUrl();
 }
