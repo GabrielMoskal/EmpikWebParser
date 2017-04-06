@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="booksapp@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.1">
+    <root id="1"/>
+    <schema id="2" parent="1" name="booksapp">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="learningwordpress"/>
+    <schema id="5" parent="1" name="mydb"/>
+    <schema id="6" parent="1" name="myspringproject"/>
+    <schema id="7" parent="1" name="mysql"/>
+    <schema id="8" parent="1" name="performance_schema"/>
+    <schema id="9" parent="1" name="phpmyadmin"/>
+    <schema id="10" parent="1" name="spitter"/>
+    <schema id="11" parent="1" name="test"/>
+    <table id="12" parent="2" name="authorities"/>
+    <table id="13" parent="2" name="ksiazki"/>
+    <table id="14" parent="2" name="names"/>
+    <column id="15" parent="12" name="username">
+      <Position>1</Position>
+      <DataType>varchar(15)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="12" name="authority">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="17" parent="12" name="authorities_username_uindex">
+      <ColNames>username</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="18" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>username</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="19" parent="12" name="authorities_username_uindex">
+      <ColNames>username</ColNames>
+      <UnderlyingIndexName>authorities_username_uindex</UnderlyingIndexName>
+    </key>
+    <column id="20" parent="13" name="indeks">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="21" parent="13" name="tytul">
+      <Position>2</Position>
+      <DataType>varchar(512)|0</DataType>
+    </column>
+    <column id="22" parent="13" name="autor">
+      <Position>3</Position>
+      <DataType>varchar(512)|0</DataType>
+    </column>
+    <column id="23" parent="13" name="wydawnictwo">
+      <Position>4</Position>
+      <DataType>varchar(254)|0</DataType>
+    </column>
+    <column id="24" parent="13" name="rok_wydania">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="25" parent="13" name="ilosc_stron">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="26" parent="13" name="format_ksiazki">
+      <Position>7</Position>
+      <DataType>varchar(254)|0</DataType>
+    </column>
+    <column id="27" parent="13" name="liczba_urzadzen">
+      <Position>8</Position>
+      <DataType>varchar(254)|0</DataType>
+    </column>
+    <column id="28" parent="13" name="drukowanie">
+      <Position>9</Position>
+      <DataType>varchar(254)|0</DataType>
+    </column>
+    <column id="29" parent="13" name="kopiowanie">
+      <Position>10</Position>
+      <DataType>varchar(254)|0</DataType>
+    </column>
+    <column id="30" parent="13" name="tlumacz">
+      <Position>11</Position>
+      <DataType>varchar(512)|0</DataType>
+    </column>
+    <column id="31" parent="13" name="jezyk_wydania">
+      <Position>12</Position>
+      <DataType>varchar(254)|0</DataType>
+    </column>
+    <column id="32" parent="13" name="opis">
+      <Position>13</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <index id="33" parent="13" name="ksiazka_indeks_uindex">
+      <ColNames>indeks</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="34" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>indeks</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="35" parent="13" name="ksiazka_indeks_uindex">
+      <ColNames>indeks</ColNames>
+      <UnderlyingIndexName>ksiazka_indeks_uindex</UnderlyingIndexName>
+    </key>
+    <column id="36" parent="14" name="name">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+  </database-model>
+</dataSource>

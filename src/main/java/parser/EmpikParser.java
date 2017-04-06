@@ -47,7 +47,7 @@ public class EmpikParser implements EmpikParserInterface {
 
     /**
      *
-     * @return parsed links to concrete item categories or empty if not found
+     * @return parsed links and description to concrete item categories or empty if not found
      */
     public Map<String, String> parseLinksToConcreteSubcategories() {
         Elements labels = document.getElementsByClass("categoryFacetList");
@@ -57,7 +57,7 @@ public class EmpikParser implements EmpikParserInterface {
     /**
      *
      * @param elements which
-     * @return List of Strings which contains parsed links or empty if not found
+     * @return Map of Strings which contains parsed links or empty if not found
      */
     private Map<String, String> parseLinks(Elements elements) {
         Map<String, String> concreteUrls = new HashMap<>();
@@ -81,14 +81,15 @@ public class EmpikParser implements EmpikParserInterface {
 
     /**
      * Recursive function, which goes to next pages by checking, if there is link to the next item page
-     * @return List with links to all concrete items in selected category
+     * @return Map with links to all concrete items in selected category
      */
     public Map<String, String> parseLinksToConcreteItems() {
         Elements labels = document.getElementsByClass("title");
         Map<String, String> result = parseLinks(labels);
         Elements nextPageLinkElements = document.getElementsByClass("next");
         if (nextPageLinkElements.isEmpty() == false) {
-            String linkToNextPage = parseLinks(nextPageLinkElements).get(0);
+            // key to next is empty, there is only one key
+            String linkToNextPage = parseLinks(nextPageLinkElements).get("");
             connect(linkToNextPage);
             result.putAll(parseLinksToConcreteItems());
         }
