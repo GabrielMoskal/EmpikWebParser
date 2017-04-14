@@ -29,7 +29,7 @@ public class EmpikParserTest {
 
         String url = "http://m.empik.com/w-kregach-wladzy-tom-1-wotum-nieufnosci-mroz-remigiusz,p1135880608,ebooki-i-mp3-p";
         EmpikParser parser = new EmpikParser(url);
-        Map<String, String> result = parser.parseConcreteItemInformation();
+        Map<String, String> result = parser.parseConcreteItemLabelsToDetailsInformation();
 
         assertEquals(expectedResult, result);
     }
@@ -59,7 +59,7 @@ public class EmpikParserTest {
 
         Document doc = Jsoup.parse(input, "UTF-8", "");
         EmpikParser parser = new EmpikParser(doc);
-        Map<String, String> result = parser.parseLinksToConcreteItems();
+        Map<String, String> result = parser.parseTitlesToConcreteItemsUrls();
 
         assertArrayEquals(expectedResult.toArray(), result.values().toArray());
     }

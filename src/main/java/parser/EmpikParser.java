@@ -47,29 +47,30 @@ public class EmpikParser implements EmpikParserInterface {
 
     /**
      *
-     * @return parsed links and description to concrete item categories or empty if not found
+     * @return parsed href titles and links to concrete item categories or empty if not found
      */
-    public Map<String, String> parseLinksToConcreteSubcategories() {
+    public Map<String, String> parseTitlesToConreteSubcategoriesLinks () {
         Elements labels = document.getElementsByClass("categoryFacetList");
-        return parseLinks(labels);
+        return parseTitlesToUrls(labels);
     }
 
     /**
      *
-     * @param elements which
-     * @return Map of Strings which contains parsed links or empty if not found
+     * @param elements with content being searched for urls
+     * @return parsed href titles and links found in elements or empty if not found
      */
-    private Map<String, String> parseLinks(Elements elements) {
-        Map<String, String> concreteUrls = new HashMap<>();
+    private Map<String, String> parseTitlesToUrls(Elements elements) {
+        Map<String, String> titlesToUrls = new HashMap<>();
         for (Element element : elements) {
+            /* next level of parsing, Element.select returns Elements */
             Elements links = element.select("a[href]");
-            Map<String, String> urls = parseUrlsAndLabelsFromElements(links);
-            concreteUrls.putAll(urls);
+            Map<String, String> urls = parseTitlesToUrlsFromElements(links);
+            titlesToUrls.putAll(urls);
         }
-        return concreteUrls;
+        return titlesToUrls;
     }
 
-    private Map<String, String> parseUrlsAndLabelsFromElements(Elements elements) {
+    private Map<String, String> parseTitlesToUrlsFromElements(Elements elements) {
         Map<String, String> hrefs = new HashMap<>();
         for (Element element : elements) {
             String url = EMPIK_ROOT_URL + element.attr("href");
@@ -80,18 +81,18 @@ public class EmpikParser implements EmpikParserInterface {
     }
 
     /**
-     * Recursive function, which goes to next pages by checking, if there is link to the next item page
+     * Recursive function, which goes to next pages if there is a link to the next item page
      * @return Map with links to all concrete items in selected category
      */
-    public Map<String, String> parseLinksToConcreteItems() {
+    public Map<String, String> parseTitlesToConcreteItemsUrls() {
         Elements labels = document.getElementsByClass("title");
-        Map<String, String> result = parseLinks(labels);
+        Map<String, String> result = parseTitlesToUrls(labels);
         Elements nextPageLink = document.getElementsByClass("next");
-        if (nextPageLink.isEmpty() == false) {
+        if (!nextPageLink.isEmpty()) {
             // key to next is empty, there is only one key
-            String linkToNextPage = parseLinks(nextPageLink).get("");
+            String linkToNextPage = parseTitlesToUrls(nextPageLink).get("");
             connect(linkToNextPage);
-            result.putAll(parseLinksToConcreteItems());
+            result.putAll(parseTitlesToConcreteItemsUrls());
         }
         return result;
     }
@@ -102,7 +103,7 @@ public class EmpikParser implements EmpikParserInterface {
      * map keys are name of item being described on the page,
      * empty if no item found
      */
-    public Map<String, String> parseConcreteItemInformation() {
+    public Map<String, String> parseConcreteItemLabelsToDetailsInformation() {
         Element productMainInfo = document.getElementById("layoutContent");
         if (productMainInfo == null) {
             return Collections.emptyMap();
@@ -114,10 +115,10 @@ public class EmpikParser implements EmpikParserInterface {
     private Pair<Elements, Elements> makePairOfLabelsAndDetails(Element productMainInfo) {
         Elements labels = productMainInfo.getElementsByClass("productDetailsLabel");
         Elements details = productMainInfo.getElementsByClass("productDetailsValue");
-        Pair<Elements, Elements> labelsAndDetails = new Pair<>();
-        labelsAndDetails.setObject1(labels);
-        labelsAndDetails.setObject2(details);
-        return labelsAndDetails;
+        Pair<Elements, Elements> labelsToDetails = new Pair<>();
+        labelsToDetails.setObject1(labels);
+        labelsToDetails.setObject2(details);
+        return labelsToDetails;
     }
 
     private Map<String, String> makeBookInfo(Pair<Elements, Elements> pairOfLabelsAndDetails) {
@@ -143,15 +144,6 @@ public class EmpikParser implements EmpikParserInterface {
         return result;
     }
 
-    /**
-     *
-     * @return String with description of concrete item from link which this is connected to
-     */
-    public String parseConcreteItemDescription() {
-        Elements description = document.getElementsByClass("productDescriptionText");
-        return preserveLineBreaks(description);
-    }
-
     public String parseConcreteItemImageUrl() {
         Elements imageClasses = document.getElementsByClass("productGalleryImage oneImage");
         Element imageClass = imageClasses.first();
@@ -160,6 +152,15 @@ public class EmpikParser implements EmpikParserInterface {
         }
         Elements imageSource = imageClass.select("img[src]");
         return imageSource.attr("src");
+    }
+
+    /**
+     *
+     * @return String with description of concrete item from link which this is connected to
+     */
+    public String parseConcreteItemDescription() {
+        Elements description = document.getElementsByClass("productDescriptionText");
+        return preserveLineBreaks(description);
     }
 
     private String preserveLineBreaks(Elements elements) {

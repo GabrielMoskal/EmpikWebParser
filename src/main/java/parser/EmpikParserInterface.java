@@ -7,9 +7,9 @@ import java.util.Map;
  */
 public interface EmpikParserInterface {
     void connect(String url);
-    Map<String, String> parseLinksToConcreteSubcategories();
-    Map<String, String> parseLinksToConcreteItems();
-    Map<String, String> parseConcreteItemInformation();
+    Map<String, String> parseTitlesToConreteSubcategoriesLinks();
+    Map<String, String> parseTitlesToConcreteItemsUrls();
+    Map<String, String> parseConcreteItemLabelsToDetailsInformation();
     String parseConcreteItemDescription();
     String parseConcreteItemImageUrl();
 }
